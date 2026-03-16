@@ -1,0 +1,14 @@
+[project]
+name = "urlscan_io"
+version = "3.0.0"
+description = "urlscan.io connector for Splunk SOAR — URL scanning, threat intelligence, and screenshot capture"
+license = "Apache-2.0"
+requires-python = ">=3.9,<3.14"
+authors = ["Splunk Inc."]
+dependencies = [
+    "splunk-soar-sdk",
+    "httpx",
+]
+
+[tool.soar.app]
+main_module = "src.app:app"
