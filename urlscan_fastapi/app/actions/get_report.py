@@ -1,12 +1,31 @@
+"""
+Get Report Action
+Handles retrieval of scan reports
+"""
+from typing import Dict, Any
 from app.services.urlscan_service import UrlscanService
 
 
 class GetReportAction:
+    """
+    Action class for retrieving scan reports.
+    Fetches and formats scan report data.
+    """
 
     def __init__(self):
+        """Initialize the action with URLscan service."""
         self.service = UrlscanService()
 
-    def execute(self, uuid: str):
+    def execute(self, uuid: str) -> Dict[str, Any]:
+        """
+        Execute the get report action.
+        
+        Args:
+            uuid: The scan UUID to retrieve
+            
+        Returns:
+            Dict containing status, message, data, and summary
+        """
         result = self.service.get_report(uuid)
 
         if not result["success"]:
@@ -22,13 +41,16 @@ class GetReportAction:
             "message": "Report fetched successfully",
             "data": [
                 {
-                    "url": result["url"],
-                    "ip": result["ip"],
-                    "country": result["country"]
+                    "uuid": uuid,
+                    "url": result.get("url"),
+                    "ip": result.get("ip"),
+                    "country": result.get("country")
                 }
             ],
             "summary": {
-                "url": result["url"],
-                "ip": result["ip"]
+                "uuid": uuid,
+                "url": result.get("url"),
+                "ip": result.get("ip"),
+                "country": result.get("country")
             }
         }
